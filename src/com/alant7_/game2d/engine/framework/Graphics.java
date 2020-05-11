@@ -4,6 +4,7 @@ import com.alant7_.game2d.engine.math.Vector;
 import com.alant7_.game2d.engine.world.GameObject;
 import com.alant7_.game2d.engine.world.GameWorld;
 import com.alant7_.game2d.engine.world.light.Light;
+import com.alant7_.game2d.engine.world.light.LightObstruction;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -20,6 +21,7 @@ public class Graphics extends Canvas {
     public static boolean RenderGrid = false, RenderLightGrid = false;
 
     public static List<Light> Lights = new ArrayList<>();
+    public static List<LightObstruction> LightObstructions = new ArrayList<>();
 
     public void Render() {
 

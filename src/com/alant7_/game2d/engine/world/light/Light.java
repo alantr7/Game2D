@@ -5,8 +5,8 @@ import com.alant7_.game2d.engine.framework.Window;
 import com.alant7_.game2d.engine.math.Vector;
 import com.alant7_.game2d.engine.world.GameWorld;
 
-import java.awt.Graphics2D;
-import java.awt.Color;
+import java.awt.*;
+import java.awt.geom.Line2D;
 
 public class Light {
 
@@ -31,8 +31,10 @@ public class Light {
 
         Elapsed += System.currentTimeMillis() - Start;
 
+        Vector CENTER = new Vector(Position.X * WIDTH, Position.Y * HEIGHT);
+
         for (int i = -(int)MAX_DISTANCE; i <= (int)MAX_DISTANCE; i++) {
-            for (int j = -(int)(MAX_DISTANCE); j <= (int)MAX_DISTANCE; j++) {
+            Check: for (int j = -(int)(MAX_DISTANCE); j <= (int)MAX_DISTANCE; j++) {
 
                 Start = System.currentTimeMillis();
 
@@ -45,7 +47,16 @@ public class Light {
 
                 RenderStart = System.currentTimeMillis();
                 G.setColor(new Color(255, 255, 180, Alpha));
-                G.fillRect((int)((i + Position.X) * WIDTH), (int)((j + Position.Y) * HEIGHT), (int)WIDTH, (int)HEIGHT);
+
+                Vector POSITION = new Vector((i + Position.X) * WIDTH, (j + Position.Y) * HEIGHT);
+
+                for (int k = 0; k < Graphics.LightObstructions.size(); k++) {
+                    if (Graphics.LightObstructions.get(k).Rectangle().intersectsLine(new Line2D.Float((int)CENTER.X, (int)CENTER.Y, (int)POSITION.X, (int)POSITION.Y))) {
+                        continue Check;
+                    }
+                }
+
+                G.fillRect((int)POSITION.X, (int)POSITION.Y, (int)WIDTH, (int)HEIGHT);
 
                 RenderElapsed += System.currentTimeMillis() - RenderStart;
 
