@@ -20,7 +20,7 @@ public class Light {
 
     public void Render(Graphics2D G) {
 
-        long Elapsed = 0, RenderElapsed = 0, Start = System.currentTimeMillis(), RenderStart = 0;
+        long Elapsed = 0, RenderElapsed = 0, Start = System.nanoTime(), RenderStart = 0;
 
         double WIDTH = GameWorld.TileSize.X / Graphics.LightTilesPerTile.X;
         double HEIGHT = GameWorld.TileSize.Y / Graphics.LightTilesPerTile.Y;
@@ -29,24 +29,24 @@ public class Light {
 
         Position = GameWorld.GetMousePosition().Divide(new Vector((int)WIDTH, (int)HEIGHT)).IntegerValues();
 
-        Elapsed += System.currentTimeMillis() - Start;
+        Elapsed += System.nanoTime() - Start;
 
         Vector CENTER = new Vector(Position.X * WIDTH, Position.Y * HEIGHT);
 
         for (int i = -(int)MAX_DISTANCE; i <= (int)MAX_DISTANCE; i++) {
             Check: for (int j = -(int)(MAX_DISTANCE); j <= (int)MAX_DISTANCE; j++) {
 
-                Start = System.currentTimeMillis();
+                Start = System.nanoTime();
 
                 double Distance = Math.sqrt(i * i + j * j);
                 int Alpha = 150 - (int)(Distance / MAX_DISTANCE * 150);
 
                 if (Alpha < 0) Alpha = 0;
 
-                Elapsed += System.currentTimeMillis() - Start;
+                Elapsed += System.nanoTime() - Start;
 
-                RenderStart = System.currentTimeMillis();
-                G.setColor(new Color(255, 255, 180, Alpha));
+                RenderStart = System.nanoTime();
+                G.setColor(new Color(0, 0, 0, Alpha));
 
                 Vector POSITION = new Vector((i + Position.X) * WIDTH, (j + Position.Y) * HEIGHT);
 
@@ -58,12 +58,12 @@ public class Light {
 
                 G.fillRect((int)POSITION.X, (int)POSITION.Y, (int)WIDTH, (int)HEIGHT);
 
-                RenderElapsed += System.currentTimeMillis() - RenderStart;
+                RenderElapsed += System.nanoTime() - RenderStart;
 
             }
         }
 
-        System.out.println("Elapsed: " + Elapsed + "ms  Render Elapsed: " + RenderElapsed + "ms");
+        System.out.println("Elapsed: " + Elapsed + "ns  Render Elapsed: " + RenderElapsed + "ns");
 
     }
 

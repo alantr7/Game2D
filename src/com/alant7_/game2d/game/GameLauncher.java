@@ -16,11 +16,12 @@ public class GameLauncher {
 
         Graphics.LightTilesPerTile = new Vector(4, 4);
 
-        new Light(20);
-        new LightObstruction(12, 12, 2, 2);
-        new LightObstruction(20, 12, 2, 2);
-        new LightObstruction(20, 20, 2, 2);
-        new LightObstruction(12, 20, 2, 2);
+        new Light(5);
+
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10; j++) {
+                new LightObstruction(8 * i, 8 * j, 2, 2);
+            }
     }
 
 }

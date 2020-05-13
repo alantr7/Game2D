@@ -10,6 +10,10 @@ public abstract class GameObject {
         GameWorld.Objects.add(this);
     }
 
+    public void ApplyProperties(String Name) {
+
+    }
+
     public abstract void Render(java.awt.Graphics g);
     public abstract void Update();
 

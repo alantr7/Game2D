@@ -36,7 +36,7 @@ public class Graphics extends Canvas {
 
             java.awt.Graphics2D Graphics = (Graphics2D)bs.getDrawGraphics();
 
-            Graphics.setColor(Color.BLACK);
+            Graphics.setColor(Color.WHITE);
             Graphics.fillRect(0, 0, 1920, 1080);
 
             Graphics.setStroke(new BasicStroke(1));
@@ -44,16 +44,16 @@ public class Graphics extends Canvas {
             Graphics.setColor(Color.BLACK);
             if (RenderLightGrid)
                 for (int i = 0; i < 64; i++)
-                    for (int j = 0; j < 64; j++) {
+                    for (int j = 0; j < 64; j++)
                         Graphics.drawRect(i * (int)GameWorld.TileSize.X / (int)LightTilesPerTile.X, j * (int)GameWorld.TileSize.Y / (int)LightTilesPerTile.Y, (int)GameWorld.TileSize.X / (int)LightTilesPerTile.X, (int)GameWorld.TileSize.Y / (int)LightTilesPerTile.Y);
-                    }
 
-            if (RenderGrid)
+            if (RenderGrid) {
                 Graphics.setStroke(new BasicStroke(2));
                 for (int i = 0; i < 64; i++)
                     for (int j = 0; j < 64; j++) {
-                        Graphics.drawRect(i * (int)GameWorld.TileSize.X, j * (int)GameWorld.TileSize.Y, (int)GameWorld.TileSize.X, (int)GameWorld.TileSize.Y);
+                        Graphics.drawRect(i * (int) GameWorld.TileSize.X, j * (int) GameWorld.TileSize.Y, (int) GameWorld.TileSize.X, (int) GameWorld.TileSize.Y);
                     }
+            }
 
             for (int i = 0; i < Lights.size(); i++)
                 Lights.get(i).Render(Graphics);
